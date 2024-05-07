@@ -1,0 +1,54 @@
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+categories = ['teacher', 'nurse', 'police', 'doctor']
+data = pd.DataFrame({'Category': categories})
+encoder = OneHotEncoder(sparse_output=False, dtype=int)
+encoded_data = encoder.fit_transform(data)
+encoded_df = pd.DataFrame(encoded_data, columns=categories)
+encoded_df.head()
+
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+documents = ["This is the first document.",
+"This document is the second document.",
+"And this is the third one.",
+"Is this the first document?"]
+data = pd.DataFrame({'Text': documents})
+vectorizer = CountVectorizer()
+bow_vectors = vectorizer.fit_transform(data['Text'])
+bow_df = pd.DataFrame(bow_vectors.toarray(), columns=vectorizer.get_feature_names_out())
+bow_df.head()
+
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+documents = ["This is the first document.",
+"This document is the second document.",
+"And this is the third one.",
+"Is this the first document?"]
+data = pd.DataFrame({'Text': documents})
+ngram_vectorizer = CountVectorizer(ngram_range=(2,3))
+ngram_vectors = ngram_vectorizer.fit_transform(data['Text'])
+ngram_df = pd.DataFrame(ngram_vectors.toarray(), columns=ngram_vectorizer.get_feature_names_out())
+ngram_df.head()
+
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+documents = ["This is the first document.",
+"This document is the second document.",
+"And this is the third one.",
+"Is this the first document?"]
+data = pd.DataFrame({'Text': documents})
+ngram_vectorizer = CountVectorizer(ngram_range=(2,3))
+ngram_vectors = ngram_vectorizer.fit_transform(data['Text'])
+ngram_df = pd.DataFrame(ngram_vectors.toarray(), columns=ngram_vectorizer.get_feature_names_out())
+ngram_df.head()
+
+pip install genism
+import pandas as pd
+from gensim.models import FastText
+sentences = [["I", "like", "apples"],
+["I", "enjoy", "eating", "fruits"]]
+model_fasttext = FastText(sentences, min_count=1, window=5, vector_size=100)
+word_vectors = model_fasttext.wv
+word_vectors_df = pd.DataFrame(word_vectors.vectors, index=word_vectors.index_to_key)
+word_vectors_df.head(10)
